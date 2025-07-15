@@ -47,7 +47,7 @@ export default function EdChoiceCalculator() {
 
     const cVal = 0.5;
 
-    if fplRatio <= 4.5
+    if (fplRatio <= 4.5)
       return 1.0 // maximum award is 100%
     else
       return Math.max(
