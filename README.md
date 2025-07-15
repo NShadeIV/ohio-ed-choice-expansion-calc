@@ -1,4 +1,4 @@
-# Agi household calculator
+# Ohio EdChoice Expansion award calculator
 
 *Automatically synced with your [v0.dev](https://v0.dev) deployments*
 
