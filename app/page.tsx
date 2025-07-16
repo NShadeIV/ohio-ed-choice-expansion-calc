@@ -32,37 +32,38 @@ export default function EdChoiceCalculator() {
       householdSize: "",
     },
   })
-  
+
   function calculateFplRatio(agi: number, householdSize: number) {
     // Federal Poverty Level guidelines (2025 example - would need to be updated annually)
     // https://aspe.hhs.gov/sites/default/files/documents/dd73d4f00d8a819d10b2fdb70d254f7b/detailed-guidelines-2025.pdf
-    const fplBase = 10150;
-    const fplBasePerPerson = 5500;
+    const fplBase = 10150
+    const fplBasePerPerson = 5500
 
-    return agi / (fplBase + fplBasePerPerson * householdSize);
+    return agi / (fplBase + fplBasePerPerson * householdSize)
   }
 
   function calculateAwardRatio(fplRatio: number) {
     // https://education.ohio.gov/getattachment/Topics/Other-Resources/Scholarships/EdChoice-Expansion/EdChoice-Expansion-Resources/EdChoice-Expansion-Award-Amounts-FY26.xlsx.aspx?lang=en-US
 
-    const cVal = 0.5;
+    const cVal = 0.5
 
     if (fplRatio <= 4.5)
       return 1.0 // maximum award is 100%
     else
       return Math.max(
         0.1, // minimum award is 10%
-        Math.pow(1 / cVal, 4.5) * Math.exp(Math.log(cVal) * fplRatio)
-      );
+        Math.pow(1 / cVal, 4.5) * Math.exp(Math.log(cVal) * fplRatio),
+      )
   }
 
   function calculateAwards(agi: number, householdSize: number): { k8: number; high: number } {
-    const fplRatio = calculateFplRatio(agi, householdSize);
-    const awardRatio = calculateAwardRatio(fplRatio);
+    const fplRatio = calculateFplRatio(agi, householdSize)
+    const awardRatio = calculateAwardRatio(fplRatio)
+
     return {
-        k8: (6166 * awardRatio).toFixed(2),
-        high: (8408 * awardRatio).toFixed(2)
-    };
+      k8: parseFloat((6166 * awardRatio).toFixed(2)),
+      high: parseFloat((8408 * awardRatio).toFixed(2)),
+    }
   }
 
   function onSubmit(values: FormValues) {
@@ -72,7 +73,16 @@ export default function EdChoiceCalculator() {
   return (
     <main className="container mx-auto max-w-3xl px-4 py-10">
       <h1 className="mb-2 text-center text-3xl font-bold">EdChoice Expansion Award Calculator</h1>
-      <p className="mb-8 text-center text-sm font-medium">Based on the <a className="text-blue-500 hover:underline" href="https://education.ohio.gov/Topics/Other-Resources/Scholarships/EdChoice-Expansion/EdChoice-Expansion-Resources">EdChoice Expansion Resources</a> at the Ohio Department of Education</p>
+      <p className="mb-8 text-center text-sm font-medium">
+        Based on the{" "}
+        <a
+          className="text-blue-500 hover:underline"
+          href="https://education.ohio.gov/Topics/Other-Resources/Scholarships/EdChoice-Expansion/EdChoice-Expansion-Resources"
+        >
+          EdChoice Expansion Resources
+        </a>{" "}
+        at the Ohio Department of Education
+      </p>
 
       <Card>
         <CardHeader>
@@ -100,8 +110,9 @@ export default function EdChoiceCalculator() {
                         <Input type="number" min="0" step="1" placeholder="45000" className="pl-7" {...field} />
                       </div>
                     </FormControl>
-                    <FormDescription>Line 11 of your federal tax returns or Line 3 of your Ohio tax
-returns</FormDescription>
+                    <FormDescription>
+                      Line 11 of your federal tax returns or Line 3 of your Ohio tax returns
+                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -150,8 +161,7 @@ returns</FormDescription>
             </div>
 
             <p className="text-center text-sm text-muted-foreground">
-              These amounts are estimates and may change after official verification. Awards are per student per school
-              year.
+              These amounts are estimates and may change after official verification
             </p>
           </CardFooter>
         )}
