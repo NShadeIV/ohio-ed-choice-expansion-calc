@@ -14,7 +14,7 @@ Any changes you make to your deployed app will be automatically pushed to this r
 
 Your project is live at:
 
-**[https://vercel.com/nshadeiv-9903s-projects/v0-agi-household-calculator](https://vercel.com/nshadeiv-9903s-projects/v0-agi-household-calculator)**
+**[https://vercel.com/nshadeiv-projects/ohio-ed-choice-expansion-calc](https://vercel.com/nshadeiv-projects/ohio-ed-choice-expansion-calc)**
 
 ## Build your app
 
